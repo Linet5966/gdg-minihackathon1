@@ -119,6 +119,24 @@
         </section>
       </main>
     </div>
+    <script>
+      // Check authentication before allowing access to games page
+      function checkAuth() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+          // User not authenticated, redirect to login
+          window.location.href = 'login.html';
+          return false;
+        }
+        return true;
+      }
+
+      // Check authentication on page load
+      if (!checkAuth()) {
+        // Exit early if not authenticated
+        throw new Error('Authentication required');
+      }
+    </script>
     <script src="Games2.js"></script>
   </body>
 </html>

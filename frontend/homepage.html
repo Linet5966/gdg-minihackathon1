@@ -17,9 +17,9 @@
         <li><a href="Goalspage.html">Goals</a></li>
         <li><a href="GoalsTracker.html">Tracker</a></li>
         <li><a href="games.html">Games</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="signup.html" class="primary-btn">Sign Up</a></li>
-        <li id="logout-nav"><a href="#" id="logout-link" class="back-btn">Logout</a></li>
+        <li id="login-nav"><a href="login.html">Login</a></li>
+        <li id="signup-nav"><a href="signup.html" class="primary-btn">Sign Up</a></li>
+        <li id="logout-nav" style="display: none;"><a href="#" id="logout-link" class="back-btn">Logout</a></li>
       </ul>
     </nav>
     <div id="main-content">
@@ -115,6 +115,57 @@
         </section>
       </main>
     </div>
+    <script>
+      // Check authentication before allowing access to homepage
+      function checkAuth() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+          // User not authenticated, redirect to login
+          window.location.href = 'login.html';
+          return false;
+        }
+        return true;
+      }
+
+      // Update navigation based on auth state
+      function updateNavigation() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const loginNav = document.getElementById('login-nav');
+        const signupNav = document.getElementById('signup-nav');
+        const logoutNav = document.getElementById('logout-nav');
+        const logoutLink = document.getElementById('logout-link');
+
+        if (loggedInUser) {
+          // User is logged in - show logout, hide login/signup
+          if (loginNav) loginNav.style.display = 'none';
+          if (signupNav) signupNav.style.display = 'none';
+          if (logoutNav) logoutNav.style.display = 'block';
+
+          // Setup logout functionality
+          if (logoutLink) {
+            logoutLink.addEventListener('click', (e) => {
+              e.preventDefault();
+              localStorage.removeItem('loggedInUser');
+              window.location.href = '../index.html';
+            });
+          }
+        } else {
+          // User not logged in - show login/signup, hide logout
+          if (loginNav) loginNav.style.display = 'block';
+          if (signupNav) signupNav.style.display = 'block';
+          if (logoutNav) logoutNav.style.display = 'none';
+        }
+      }
+
+      // Check authentication on page load
+      if (!checkAuth()) {
+        // Exit early if not authenticated
+        throw new Error('Authentication required');
+      }
+
+      // Update navigation after auth check
+      updateNavigation();
+    </script>
     <script src="homepage.js"></script>
   </body>
 </html>

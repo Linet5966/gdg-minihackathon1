@@ -32,7 +32,7 @@ function showLogoutNav() {
       e.preventDefault();
       localStorage.removeItem('loggedInUser');
       if (logoutNav) logoutNav.style.display = 'none';
-      window.location.href = 'index.html';
+      window.location.href = '../index.html';
     }, { once: true });
   }
 }
@@ -178,7 +178,7 @@ if (signupForm) {
     localStorage.setItem('loggedInUser', email);
     showLogoutNav();
     showSuccess(err, 'Account created! Redirecting…');
-    setTimeout(() => { window.location.href = 'index.html'; }, 900);
+    setTimeout(() => { window.location.href = 'homepage.html'; }, 900);
   });
 }
 
@@ -204,7 +204,7 @@ if (loginForm) {
     localStorage.setItem('loggedInUser', email);
     showLogoutNav();
     showSuccess(err, 'Logged in — redirecting…');
-    setTimeout(() => { window.location.href = 'index.html'; }, 700);
+    setTimeout(() => { window.location.href = 'homepage.html'; }, 700);
   });
 }
 
@@ -229,7 +229,7 @@ if (loginForm) {
   const logoutBtn = badge.querySelector('#logout-btn');
   logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('loggedInUser');
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
   });
 
   // ensure the sidebar logout link is visible too

@@ -178,7 +178,7 @@ if (signupForm) {
     localStorage.setItem('loggedInUser', email);
     showLogoutNav();
     showSuccess(err, 'Account created! Redirecting…');
-    setTimeout(() => { window.location.href = 'homepage.html'; }, 900);
+    setTimeout(() => { window.location.href = '../index.html'; }, 900);
   });
 }
 
@@ -204,7 +204,7 @@ if (loginForm) {
     localStorage.setItem('loggedInUser', email);
     showLogoutNav();
     showSuccess(err, 'Logged in — redirecting…');
-    setTimeout(() => { window.location.href = 'homepage.html'; }, 700);
+    setTimeout(() => { window.location.href = '../index.html'; }, 700);
   });
 }
 
